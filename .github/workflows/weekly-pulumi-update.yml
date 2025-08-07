@@ -2,8 +2,6 @@
 
 name: weekly-pulumi-update
 on:
-  schedule:
-  - cron: 35 12 * * 4
   workflow_dispatch: {}
 env:
   GITHUB_TOKEN: ${{ secrets.PULUMI_BOT_TOKEN }}
