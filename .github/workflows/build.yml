@@ -2,17 +2,6 @@
 
 name: main # For consistency with bridged providers.
 on:
-  push:
-    branches:
-    - master
-    - main
-    - feature-**
-    paths-ignore:
-    - CHANGELOG.md
-    tags-ignore:
-    - v*
-    - sdk/*
-    - "**"
   workflow_dispatch: {}
 env:
   AZURE_SIGNING_CLIENT_ID: ${{ secrets.AZURE_SIGNING_CLIENT_ID }}
