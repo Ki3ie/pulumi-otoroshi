@@ -1,12 +1,11 @@
-import * as pulumi from "@pulumi/pulumi";
-import * as boilerplate from "@mynamespace/provider-boilerplate";
+import {Organization, Tenant} from "@pulumi/otoroshi/organize";
 
-const myRandomResource = new boilerplate.Random("myRandomResource", {
-  length: 24,
+const organizationName = "organization-1";
+new Organization(organizationName, {
+    name: organizationName,
 });
-const myRandomComponent = new boilerplate.RandomComponent("myRandomComponent", {
-  length: 24,
+
+const tenantName = "tenant-1";
+new Tenant(tenantName, {
+    name: tenantName
 });
-export const output = {
-  value: myRandomResource.result,
-};

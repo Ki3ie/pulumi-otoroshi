@@ -7,6 +7,7 @@ This repository is a boilerplate showing how to create and locally test a native
 This boilerplate creates a working Pulumi-owned provider named `provider-boilerplate`.
 It implements a random number generator that you can [build and test out for yourself](#test-against-the-example) and then replace the Random code with code specific to your provider.
 
+rm -rf bin && make provider && make build && make install && rm -rf ~/.pulumi/plugins/resource-otoroshi-v1.0.0 && mkdir -p ~/.pulumi/plugins/resource-otoroshi-v1.0.0 && cp bin/pulumi-resource-otoroshi ~/.pulumi/plugins/resource-otoroshi-v1.0.0/ && pulumi plugin install resource otoroshi 1.0.0 --server file://$HOME/.pulumi/plugins/ && pulumi plugin ls
 
 ### Prerequisites
 

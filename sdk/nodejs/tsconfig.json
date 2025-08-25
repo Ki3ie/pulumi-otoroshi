@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "outDir": "bin",
-        "target": "es2016",
+        "target": "ES2020",
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
@@ -16,9 +16,15 @@
         "config/index.ts",
         "config/vars.ts",
         "index.ts",
+        "organize/index.ts",
+        "organize/organization.ts",
+        "organize/serviceGroup.ts",
+        "organize/team.ts",
+        "organize/tenant.ts",
         "provider.ts",
-        "random.ts",
-        "randomComponent.ts",
+        "types/index.ts",
+        "types/input.ts",
+        "types/output.ts",
         "utilities.ts"
     ]
 }

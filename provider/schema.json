@@ -1,0 +1,330 @@
+{
+  "name": "otoroshi",
+  "displayName": "otoroshi",
+  "namespace": "pulumi",
+  "meta": {
+    "moduleFormat": "(.*)"
+  },
+  "language": {
+    "go": {
+      "importBasePath": "github.com/pulumi/otoroshi/sdk/go/otoroshi"
+    },
+    "nodejs": {
+      "respectSchemaVersion": true
+    }
+  },
+  "config": {
+    "variables": {
+      "otoroshiAdminClientId": {
+        "type": "string",
+        "secret": true
+      },
+      "otoroshiAdminClientSecret": {
+        "type": "string",
+        "secret": true
+      },
+      "otoroshiAdminUrl": {
+        "type": "string"
+      }
+    },
+    "defaults": [
+      "otoroshiAdminClientId",
+      "otoroshiAdminClientSecret",
+      "otoroshiAdminUrl"
+    ]
+  },
+  "types": {
+    "otoroshi:common:LocationInputs": {
+      "properties": {
+        "teams": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tenant": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "otoroshi:common:LocationOutput": {
+      "properties": {
+        "teams": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tenant": {
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "required": [
+        "teams",
+        "tenant"
+      ]
+    }
+  },
+  "provider": {
+    "properties": {
+      "otoroshiAdminClientId": {
+        "type": "string",
+        "secret": true
+      },
+      "otoroshiAdminClientSecret": {
+        "type": "string",
+        "secret": true
+      },
+      "otoroshiAdminUrl": {
+        "type": "string"
+      }
+    },
+    "type": "object",
+    "required": [
+      "otoroshiAdminClientId",
+      "otoroshiAdminClientSecret",
+      "otoroshiAdminUrl"
+    ],
+    "inputProperties": {
+      "otoroshiAdminClientId": {
+        "type": "string",
+        "secret": true
+      },
+      "otoroshiAdminClientSecret": {
+        "type": "string",
+        "secret": true
+      },
+      "otoroshiAdminUrl": {
+        "type": "string"
+      }
+    },
+    "requiredInputs": [
+      "otoroshiAdminClientId",
+      "otoroshiAdminClientSecret",
+      "otoroshiAdminUrl"
+    ]
+  },
+  "resources": {
+    "otoroshi:organize:Organization": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "type": "object",
+      "required": [
+        "description",
+        "name",
+        "tags"
+      ],
+      "inputProperties": {
+        "description": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "requiredInputs": [
+        "name"
+      ]
+    },
+    "otoroshi:organize:ServiceGroup": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "location": {
+          "$ref": "#/types/otoroshi:common:LocationOutput"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "type": "object",
+      "required": [
+        "description",
+        "location",
+        "name",
+        "tags"
+      ],
+      "inputProperties": {
+        "description": {
+          "type": "string"
+        },
+        "location": {
+          "$ref": "#/types/otoroshi:common:LocationInputs"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "requiredInputs": [
+        "name"
+      ]
+    },
+    "otoroshi:organize:Team": {
+      "properties": {
+        "Team": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "type": "object",
+      "required": [
+        "Team",
+        "description",
+        "name",
+        "tags"
+      ],
+      "inputProperties": {
+        "Team": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "requiredInputs": [
+        "Team",
+        "name"
+      ]
+    },
+    "otoroshi:organize:Tenant": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "type": "object",
+      "required": [
+        "description",
+        "name",
+        "tags"
+      ],
+      "inputProperties": {
+        "description": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "requiredInputs": [
+        "name"
+      ]
+    }
+  }
+}

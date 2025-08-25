@@ -5,12 +5,28 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 declare var exports: any;
-const __config = new pulumi.Config("provider-boilerplate");
+const __config = new pulumi.Config("otoroshi");
 
-export declare const itsasecret: boolean | undefined;
-Object.defineProperty(exports, "itsasecret", {
+export declare const otoroshiAdminClientId: string | undefined;
+Object.defineProperty(exports, "otoroshiAdminClientId", {
     get() {
-        return __config.getObject<boolean>("itsasecret");
+        return __config.get("otoroshiAdminClientId");
+    },
+    enumerable: true,
+});
+
+export declare const otoroshiAdminClientSecret: string | undefined;
+Object.defineProperty(exports, "otoroshiAdminClientSecret", {
+    get() {
+        return __config.get("otoroshiAdminClientSecret");
+    },
+    enumerable: true,
+});
+
+export declare const otoroshiAdminUrl: string | undefined;
+Object.defineProperty(exports, "otoroshiAdminUrl", {
+    get() {
+        return __config.get("otoroshiAdminUrl");
     },
     enumerable: true,
 });
