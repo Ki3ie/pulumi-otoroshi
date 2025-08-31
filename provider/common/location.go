@@ -1,14 +1,28 @@
 package common
 
 import (
+	"log"
 	"reflect"
 
 	provider "github.com/pulumi/pulumi-go-provider"
 )
 
+var LocationInputsDefault = &LocationInputs{
+	Tenant: StringDefault,
+	Teams:  []string{*StringDefault},
+}
+
+type LocationInputsStruct struct {
+	Location *LocationInputs `pulumi:"location,optional" computed:"true" json:"_loc,omitempty"`
+}
+
 type LocationInputs struct {
 	Tenant *string  `pulumi:"tenant,optional" json:"tenant,omitempty"`
 	Teams  []string `pulumi:"teams,optional" json:"teams,omitempty"`
+}
+
+type LocationOutputStruct struct {
+	Location LocationOutput `pulumi:"_loc" json:"_loc"`
 }
 
 type LocationOutput struct {
@@ -28,6 +42,7 @@ func (o LocationOutput) IsEmpty() bool {
 }
 
 func DiffLocation(oldValue LocationOutput, newValue LocationOutput) provider.PropertyDiff {
+	log.Printf("DEBUG DiffLocation(oldValue=%v, newValue=%v)", oldValue, newValue)
 	if reflect.DeepEqual(oldValue, newValue) {
 		return provider.PropertyDiff{
 			Kind:      provider.Stable,

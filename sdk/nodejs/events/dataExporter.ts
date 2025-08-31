@@ -6,31 +6,31 @@ import * as inputs from "../types/input";
 import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
-export class ServiceGroup extends pulumi.CustomResource {
+export class DataExporter extends pulumi.CustomResource {
     /**
-     * Get an existing ServiceGroup resource's state with the given name, ID, and optional extra
+     * Get an existing DataExporter resource's state with the given name, ID, and optional extra
      * properties used to qualify the lookup.
      *
      * @param name The _unique_ name of the resulting resource.
      * @param id The _unique_ provider ID of the resource to lookup.
      * @param opts Optional settings to control the behavior of the CustomResource.
      */
-    public static get(name: string, id: pulumi.Input<pulumi.ID>, opts?: pulumi.CustomResourceOptions): ServiceGroup {
-        return new ServiceGroup(name, undefined as any, { ...opts, id: id });
+    public static get(name: string, id: pulumi.Input<pulumi.ID>, opts?: pulumi.CustomResourceOptions): DataExporter {
+        return new DataExporter(name, undefined as any, { ...opts, id: id });
     }
 
     /** @internal */
-    public static readonly __pulumiType = 'otoroshi:organize:ServiceGroup';
+    public static readonly __pulumiType = 'otoroshi:events:DataExporter';
 
     /**
-     * Returns true if the given object is an instance of ServiceGroup.  This is designed to work even
+     * Returns true if the given object is an instance of DataExporter.  This is designed to work even
      * when multiple copies of the Pulumi SDK have been loaded into the same process.
      */
-    public static isInstance(obj: any): obj is ServiceGroup {
+    public static isInstance(obj: any): obj is DataExporter {
         if (obj === undefined || obj === null) {
             return false;
         }
-        return obj['__pulumiType'] === ServiceGroup.__pulumiType;
+        return obj['__pulumiType'] === DataExporter.__pulumiType;
     }
 
     declare public /*out*/ readonly _loc: pulumi.Output<outputs.common.LocationOutput>;
@@ -40,13 +40,13 @@ export class ServiceGroup extends pulumi.CustomResource {
     declare public readonly tags: pulumi.Output<string[]>;
 
     /**
-     * Create a ServiceGroup resource with the given unique name, arguments, and options.
+     * Create a DataExporter resource with the given unique name, arguments, and options.
      *
      * @param name The _unique_ name of the resource.
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: ServiceGroupArgs, opts?: pulumi.CustomResourceOptions) {
+    constructor(name: string, args: DataExporterArgs, opts?: pulumi.CustomResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (!opts.id) {
@@ -67,14 +67,14 @@ export class ServiceGroup extends pulumi.CustomResource {
             resourceInputs["tags"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
-        super(ServiceGroup.__pulumiType, name, resourceInputs, opts);
+        super(DataExporter.__pulumiType, name, resourceInputs, opts);
     }
 }
 
 /**
- * The set of arguments for constructing a ServiceGroup resource.
+ * The set of arguments for constructing a DataExporter resource.
  */
-export interface ServiceGroupArgs {
+export interface DataExporterArgs {
     description?: pulumi.Input<string>;
     location?: pulumi.Input<inputs.common.LocationInputsArgs>;
     metadata?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;

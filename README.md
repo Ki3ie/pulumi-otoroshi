@@ -9,6 +9,8 @@ It implements a random number generator that you can [build and test out for you
 
 rm -rf bin && make provider && make build && make install && rm -rf ~/.pulumi/plugins/resource-otoroshi-v1.0.0 && mkdir -p ~/.pulumi/plugins/resource-otoroshi-v1.0.0 && cp bin/pulumi-resource-otoroshi ~/.pulumi/plugins/resource-otoroshi-v1.0.0/ && pulumi plugin install resource otoroshi 1.0.0 --server file://$HOME/.pulumi/plugins/ && pulumi plugin ls
 
+DEBUG : pulumi up --logtostderr -v=3
+
 ### Prerequisites
 
 You will need to ensure the following tools are installed and present in your `$PATH`:

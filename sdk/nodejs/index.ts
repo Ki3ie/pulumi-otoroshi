@@ -13,12 +13,16 @@ utilities.lazyLoad(exports, ["Provider"], () => require("./provider"));
 
 // Export sub-modules:
 import * as config from "./config";
+import * as events from "./events";
 import * as organize from "./organize";
+import * as proxy from "./proxy";
 import * as types from "./types";
 
 export {
     config,
+    events,
     organize,
+    proxy,
     types,
 };
 pulumi.runtime.registerResourcePackage("otoroshi", {

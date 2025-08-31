@@ -65,6 +65,409 @@
         "teams",
         "tenant"
       ]
+    },
+    "otoroshi:proxy:BackendInputs": {
+      "properties": {
+        "rewrite": {
+          "type": "boolean"
+        },
+        "root": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "otoroshi:proxy:BackendOutput": {
+      "properties": {
+        "client": {
+          "$ref": "#/types/otoroshi:proxy:ClientOutput"
+        },
+        "health_check": {
+          "$ref": "#/types/otoroshi:proxy:HealthCheckOutput"
+        },
+        "load_balancing": {
+          "$ref": "#/types/otoroshi:proxy:LoadBalancingOutput"
+        },
+        "rewrite": {
+          "type": "boolean"
+        },
+        "root": {
+          "type": "string"
+        },
+        "targets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/types/otoroshi:proxy:TargetOutput"
+          }
+        }
+      },
+      "type": "object",
+      "required": [
+        "client",
+        "load_balancing",
+        "rewrite",
+        "root",
+        "targets"
+      ]
+    },
+    "otoroshi:proxy:CacheConnectionSettingsOutput": {
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "queue_size": {
+          "type": "integer"
+        }
+      },
+      "type": "object",
+      "required": [
+        "enabled",
+        "queue_size"
+      ]
+    },
+    "otoroshi:proxy:ClientOutput": {
+      "properties": {
+        "backoff_factor": {
+          "type": "integer"
+        },
+        "cache_connection_settings": {
+          "$ref": "#/types/otoroshi:proxy:CacheConnectionSettingsOutput"
+        },
+        "call_and_stream_timeout": {
+          "type": "integer"
+        },
+        "call_timeout": {
+          "type": "integer"
+        },
+        "connection_timeout": {
+          "type": "integer"
+        },
+        "custom_timeouts": {
+          "type": "array",
+          "items": {
+            "$ref": "pulumi.json#/Any"
+          }
+        },
+        "global_timeout": {
+          "type": "integer"
+        },
+        "idle_timeout": {
+          "type": "integer"
+        },
+        "max_errors": {
+          "type": "integer"
+        },
+        "proxy": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "pulumi.json#/Any"
+          }
+        },
+        "retries": {
+          "type": "integer"
+        },
+        "retry_initial_delay": {
+          "type": "integer"
+        },
+        "sample_interval": {
+          "type": "integer"
+        }
+      },
+      "type": "object",
+      "required": [
+        "backoff_factor",
+        "cache_connection_settings",
+        "call_and_stream_timeout",
+        "call_timeout",
+        "connection_timeout",
+        "custom_timeouts",
+        "global_timeout",
+        "idle_timeout",
+        "max_errors",
+        "proxy",
+        "retries",
+        "retry_initial_delay",
+        "sample_interval"
+      ]
+    },
+    "otoroshi:proxy:FrontendInputs": {
+      "properties": {
+        "cookies": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "domains": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "exact": {
+          "type": "boolean"
+        },
+        "headers": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "methods": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "query": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "strip_path": {
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "otoroshi:proxy:FrontendOutput": {
+      "properties": {
+        "cookies": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "domains": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "exact": {
+          "type": "boolean"
+        },
+        "headers": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "methods": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "query": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "strip_path": {
+          "type": "boolean"
+        }
+      },
+      "type": "object",
+      "required": [
+        "cookies",
+        "domains",
+        "exact",
+        "headers",
+        "methods",
+        "query",
+        "strip_path"
+      ]
+    },
+    "otoroshi:proxy:HealthCheckOutput": {
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "healthy_statuses": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "timeout": {
+          "type": "integer"
+        },
+        "unhealthy_statuses": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "required": [
+        "enabled",
+        "healthy_statuses",
+        "timeout",
+        "unhealthy_statuses",
+        "url"
+      ]
+    },
+    "otoroshi:proxy:LoadBalancingOutput": {
+      "properties": {
+        "ratio": {
+          "type": "integer"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "required": [
+        "type"
+      ]
+    },
+    "otoroshi:proxy:PluginOutput": {
+      "properties": {
+        "bound_listeners": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "config": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "pulumi.json#/Any"
+          }
+        },
+        "debug": {
+          "type": "boolean"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "exclude": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "include": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "plugin": {
+          "type": "string"
+        },
+        "plugin_index": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer"
+          }
+        }
+      },
+      "type": "object",
+      "required": [
+        "bound_listeners",
+        "config",
+        "debug",
+        "enabled",
+        "exclude",
+        "include",
+        "plugin",
+        "plugin_index"
+      ]
+    },
+    "otoroshi:proxy:PredicateOutput": {
+      "properties": {
+        "type": {
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "required": [
+        "type"
+      ]
+    },
+    "otoroshi:proxy:TLSConfigOutput": {
+      "properties": {
+        "certs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "loose": {
+          "type": "boolean"
+        },
+        "trust_all": {
+          "type": "boolean"
+        },
+        "trusted_certs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "type": "object",
+      "required": [
+        "certs",
+        "enabled",
+        "loose",
+        "trust_all",
+        "trusted_certs"
+      ]
+    },
+    "otoroshi:proxy:TargetOutput": {
+      "properties": {
+        "backup": {
+          "type": "boolean"
+        },
+        "hostname": {
+          "type": "string"
+        },
+        "ip_address": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer"
+        },
+        "predicate": {
+          "$ref": "#/types/otoroshi:proxy:PredicateOutput"
+        },
+        "protocol": {
+          "type": "string"
+        },
+        "tls": {
+          "type": "boolean"
+        },
+        "tls_config": {
+          "$ref": "#/types/otoroshi:proxy:TLSConfigOutput"
+        },
+        "weight": {
+          "type": "integer"
+        }
+      },
+      "type": "object",
+      "required": [
+        "backup",
+        "hostname",
+        "ip_address",
+        "port",
+        "predicate",
+        "protocol",
+        "tls",
+        "tls_config",
+        "weight"
+      ]
     }
   },
   "provider": {
@@ -107,6 +510,64 @@
     ]
   },
   "resources": {
+    "otoroshi:events:DataExporter": {
+      "properties": {
+        "_loc": {
+          "$ref": "#/types/otoroshi:common:LocationOutput"
+        },
+        "description": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "type": "object",
+      "required": [
+        "_loc",
+        "description",
+        "name",
+        "tags"
+      ],
+      "inputProperties": {
+        "description": {
+          "type": "string"
+        },
+        "location": {
+          "$ref": "#/types/otoroshi:common:LocationInputs"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "requiredInputs": [
+        "name"
+      ]
+    },
     "otoroshi:organize:Organization": {
       "properties": {
         "description": {
@@ -160,11 +621,11 @@
     },
     "otoroshi:organize:ServiceGroup": {
       "properties": {
+        "_loc": {
+          "$ref": "#/types/otoroshi:common:LocationOutput"
+        },
         "description": {
           "type": "string"
-        },
-        "location": {
-          "$ref": "#/types/otoroshi:common:LocationOutput"
         },
         "metadata": {
           "type": "object",
@@ -184,8 +645,8 @@
       },
       "type": "object",
       "required": [
+        "_loc",
         "description",
-        "location",
         "name",
         "tags"
       ],
@@ -305,6 +766,145 @@
       "inputProperties": {
         "description": {
           "type": "string"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "requiredInputs": [
+        "name"
+      ]
+    },
+    "otoroshi:proxy:Route": {
+      "properties": {
+        "_loc": {
+          "$ref": "#/types/otoroshi:common:LocationOutput"
+        },
+        "backend": {
+          "$ref": "#/types/otoroshi:proxy:BackendOutput"
+        },
+        "backend_ref": {
+          "type": "string"
+        },
+        "bound_listeners": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "capture": {
+          "type": "boolean"
+        },
+        "debug_flow": {
+          "type": "boolean"
+        },
+        "description": {
+          "type": "string"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "export_reporting": {
+          "type": "boolean"
+        },
+        "frontend": {
+          "$ref": "#/types/otoroshi:proxy:FrontendOutput"
+        },
+        "groups": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "plugins": {
+          "type": "array",
+          "items": {
+            "$ref": "#/types/otoroshi:proxy:PluginOutput"
+          }
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "type": "object",
+      "required": [
+        "_loc",
+        "backend",
+        "bound_listeners",
+        "capture",
+        "debug_flow",
+        "description",
+        "enabled",
+        "export_reporting",
+        "frontend",
+        "groups",
+        "name",
+        "plugins",
+        "tags"
+      ],
+      "inputProperties": {
+        "backend": {
+          "$ref": "#/types/otoroshi:proxy:BackendInputs"
+        },
+        "backend_ref": {
+          "type": "string"
+        },
+        "bound_listeners": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "capture": {
+          "type": "boolean"
+        },
+        "debug_flow": {
+          "type": "boolean"
+        },
+        "description": {
+          "type": "string"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "export_reporting": {
+          "type": "boolean"
+        },
+        "frontend": {
+          "$ref": "#/types/otoroshi:proxy:FrontendInputs"
+        },
+        "groups": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "$ref": "#/types/otoroshi:common:LocationInputs"
         },
         "metadata": {
           "type": "object",

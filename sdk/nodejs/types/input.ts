@@ -12,3 +12,21 @@ export namespace common {
     }
 
 }
+
+export namespace proxy {
+    export interface BackendInputsArgs {
+        rewrite?: pulumi.Input<boolean>;
+        root?: pulumi.Input<string>;
+    }
+
+    export interface FrontendInputsArgs {
+        cookies?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+        domains?: pulumi.Input<pulumi.Input<string>[]>;
+        exact?: pulumi.Input<boolean>;
+        headers?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+        methods?: pulumi.Input<pulumi.Input<string>[]>;
+        query?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+        strip_path?: pulumi.Input<boolean>;
+    }
+
+}

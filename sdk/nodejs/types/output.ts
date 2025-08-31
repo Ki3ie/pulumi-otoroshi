@@ -12,3 +12,94 @@ export namespace common {
     }
 
 }
+
+export namespace proxy {
+    export interface BackendOutput {
+        client: outputs.proxy.ClientOutput;
+        health_check?: outputs.proxy.HealthCheckOutput;
+        load_balancing: outputs.proxy.LoadBalancingOutput;
+        rewrite: boolean;
+        root: string;
+        targets: outputs.proxy.TargetOutput[];
+    }
+
+    export interface CacheConnectionSettingsOutput {
+        enabled: boolean;
+        queue_size: number;
+    }
+
+    export interface ClientOutput {
+        backoff_factor: number;
+        cache_connection_settings: outputs.proxy.CacheConnectionSettingsOutput;
+        call_and_stream_timeout: number;
+        call_timeout: number;
+        connection_timeout: number;
+        custom_timeouts: any[];
+        global_timeout: number;
+        idle_timeout: number;
+        max_errors: number;
+        proxy: {[key: string]: any};
+        retries: number;
+        retry_initial_delay: number;
+        sample_interval: number;
+    }
+
+    export interface FrontendOutput {
+        cookies: {[key: string]: string};
+        domains: string[];
+        exact: boolean;
+        headers: {[key: string]: string};
+        methods: string[];
+        query: {[key: string]: string};
+        strip_path: boolean;
+    }
+
+    export interface HealthCheckOutput {
+        enabled: boolean;
+        healthy_statuses: number[];
+        timeout: number;
+        unhealthy_statuses: number[];
+        url: string;
+    }
+
+    export interface LoadBalancingOutput {
+        ratio?: number;
+        type: string;
+    }
+
+    export interface PluginOutput {
+        bound_listeners: string[];
+        config: {[key: string]: any};
+        debug: boolean;
+        enabled: boolean;
+        exclude: string[];
+        include: string[];
+        plugin: string;
+        plugin_index: {[key: string]: number};
+    }
+
+    export interface PredicateOutput {
+        type: string;
+    }
+
+    export interface TLSConfigOutput {
+        certs: string[];
+        enabled: boolean;
+        loose: boolean;
+        trust_all: boolean;
+        trusted_certs: string[];
+    }
+
+    export interface TargetOutput {
+        backup: boolean;
+        hostname: string;
+        ip_address: string;
+        port: number;
+        predicate: outputs.proxy.PredicateOutput;
+        protocol: string;
+        tls: boolean;
+        tls_config: outputs.proxy.TLSConfigOutput;
+        weight: number;
+    }
+
+}

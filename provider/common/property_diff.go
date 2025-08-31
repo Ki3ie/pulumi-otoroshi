@@ -1,13 +1,37 @@
 package common
 
 import (
+	"log"
 	"maps"
 	"slices"
 
 	provider "github.com/pulumi/pulumi-go-provider"
 )
 
+func DiffNilString(oldValue *string, newValue *string) provider.PropertyDiff {
+	if oldValue == newValue {
+		return provider.PropertyDiff{
+			Kind:      provider.Stable,
+			InputDiff: false,
+		}
+	}
+	var kind provider.DiffKind
+	switch {
+	case oldValue == nil && newValue != nil:
+		kind = provider.Add
+	case oldValue != nil && newValue == nil:
+		kind = provider.Delete
+	default:
+		kind = provider.Update
+	}
+	return provider.PropertyDiff{
+		Kind:      kind,
+		InputDiff: true,
+	}
+}
+
 func DiffString(oldValue string, newValue string) provider.PropertyDiff {
+	log.Printf("DEBUG DiffString: oldValue=%q, newValue=%q", oldValue, newValue)
 	if oldValue == newValue {
 		return provider.PropertyDiff{
 			Kind:      provider.Stable,
@@ -19,6 +43,28 @@ func DiffString(oldValue string, newValue string) provider.PropertyDiff {
 	case oldValue == "" && newValue != "":
 		kind = provider.Add
 	case oldValue != "" && newValue == "":
+		kind = provider.Delete
+	default:
+		kind = provider.Update
+	}
+	return provider.PropertyDiff{
+		Kind:      kind,
+		InputDiff: true,
+	}
+}
+
+func DiffBool(oldValue bool, newValue bool) provider.PropertyDiff {
+	if oldValue == newValue {
+		return provider.PropertyDiff{
+			Kind:      provider.Stable,
+			InputDiff: false,
+		}
+	}
+	var kind provider.DiffKind
+	switch {
+	case oldValue && !newValue:
+		kind = provider.Add
+	case !oldValue && newValue:
 		kind = provider.Delete
 	default:
 		kind = provider.Update
@@ -56,11 +102,10 @@ func isEmptySlice(s []string) bool {
 }
 
 func DiffMap(oldValue map[string]string, newValue map[string]string) provider.PropertyDiff {
-	if _, ok := oldValue["created_at"]; ok {
-		delete(oldValue, "created_at")
-	}
-	if _, ok := oldValue["updated_at"]; ok {
-		delete(oldValue, "updated_at")
+	ignoreKeys := []string{"created_at", "updated_at"}
+	for _, key := range ignoreKeys {
+		delete(oldValue, key)
+		delete(newValue, key)
 	}
 	if maps.Equal(oldValue, newValue) {
 		return provider.PropertyDiff{

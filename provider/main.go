@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"pulumi-otoroshi/provider/common"
+	"pulumi-otoroshi/provider/proxy"
 	"pulumi-otoroshi/provider/resources"
 
 	"github.com/pulumi/pulumi-go-provider"
@@ -29,11 +30,12 @@ func Provider() provider.Provider {
 		WithNamespace("pulumi").
 		WithConfig(infer.Config(&common.Config{})).
 		WithResources(
-			// infer.Resource(events.DataExporter{}),
+			infer.Resource(resources.NewDataExporter()),
 			infer.Resource(resources.NewOrganization()),
 			infer.Resource(resources.NewServiceGroup()),
 			infer.Resource(resources.NewTeam()),
 			infer.Resource(resources.NewTenant()),
+			infer.Resource(proxy.NewRoute()),
 		).Build()
 	if err != nil {
 		panic(fmt.Errorf("unable to build provider: %w", err))
