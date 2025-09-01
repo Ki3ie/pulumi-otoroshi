@@ -35,6 +35,9 @@ func NewOrganization() Organization {
 				}
 				return inputs
 			},
+			ExtraToOutput: func(inputs OrganizationInputs, output *OrganizationOutput) {
+				output.BaseOutputStruct = inputs.BaseInputStruct.ToOutput()
+			},
 		},
 	}
 }

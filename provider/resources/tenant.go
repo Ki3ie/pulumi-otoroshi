@@ -36,6 +36,9 @@ func NewTenant() Tenant {
 				}
 				return inputs
 			},
+			ExtraToOutput: func(inputs TenantInputs, output *TenantOutput) {
+				output.BaseOutputStruct = inputs.BaseInputStruct.ToOutput()
+			},
 		},
 	}
 }

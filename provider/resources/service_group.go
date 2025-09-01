@@ -1,7 +1,6 @@
 package resources
 
 import (
-	"log"
 	"pulumi-otoroshi/provider/common"
 
 	provider "github.com/pulumi/pulumi-go-provider"
@@ -48,9 +47,8 @@ func NewServiceGroup() ServiceGroup {
 				return inputs
 			},
 			ExtraToOutput: func(inputs ServiceGroupInputs, output *ServiceGroupOutput) {
-				log.Printf("DEBUG ServiceGroupOutput output=%v\n", output)
-				log.Printf("DEBUG ServiceGroupInputs inputs=%v\n", inputs)
-				output.Location = inputs.Location.ToOutput()
+				output.BaseOutputStruct = inputs.BaseInputStruct.ToOutput()
+				output.LocationOutputStruct = inputs.LocationInputsStruct.ToOutput()
 			},
 			ExtraDiff: func(oldValue ServiceGroupOutput, newValue ServiceGroupOutput, diffs map[string]provider.PropertyDiff) {
 				diffs["location"] = common.DiffLocation(oldValue.Location, newValue.Location)

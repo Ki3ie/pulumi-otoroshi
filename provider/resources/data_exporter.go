@@ -47,7 +47,8 @@ func NewDataExporter() DataExporter {
 				return inputs
 			},
 			ExtraToOutput: func(inputs DataExporterInputs, output *DataExporterOutput) {
-				output.Location = inputs.Location.ToOutput()
+				output.BaseOutputStruct = inputs.BaseInputStruct.ToOutput()
+				output.LocationOutputStruct = inputs.LocationInputsStruct.ToOutput()
 			},
 			ExtraDiff: func(oldValue DataExporterOutput, newValue DataExporterOutput, diffs map[string]provider.PropertyDiff) {
 				diffs["location"] = common.DiffLocation(oldValue.Location, newValue.Location)

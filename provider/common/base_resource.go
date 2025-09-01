@@ -2,7 +2,6 @@ package common
 
 import (
 	"context"
-	"log"
 	"net/http"
 
 	provider "github.com/pulumi/pulumi-go-provider"
@@ -24,9 +23,17 @@ func (inputs BaseInputStruct) GetBase() BaseInputStruct {
 	return inputs
 }
 
+func (inputs BaseInputStruct) ToOutput() BaseOutputStruct {
+	return BaseOutputStruct{
+		Name:        inputs.Name,
+		Description: *inputs.Description,
+		Tags:        inputs.Tags,
+		Metadata:    inputs.Metadata,
+	}
+}
+
 type BaseOutput interface {
 	GetBase() BaseOutputStruct
-	SetBase(BaseInputStruct)
 }
 
 type BaseOutputStruct struct {
@@ -41,38 +48,25 @@ func (output BaseOutputStruct) GetBase() BaseOutputStruct {
 	return output
 }
 
-func (output BaseOutputStruct) SetBase(o BaseInputStruct) {
-	output.Name = o.Name
-	output.Description = *o.Description
-	output.Tags = o.Tags
-	output.Metadata = o.Metadata
-}
-
 type BaseResource[I BaseInputs, O BaseOutput] struct {
 	Path          string
 	CreateOutput  func() O
 	WithDefaults  func(I) I
-	ExtraToOutput func(inputs I, output *O)
+	ExtraToOutput func(I, *O)
 	ExtraDiff     func(oldValue O, newValue O, diffs map[string]provider.PropertyDiff)
 }
 
 func (b BaseResource[I, O]) toOutput(inputs I) O {
-	log.Printf("DEBUG ToOutput(Inputs=%v)", inputs)
-	output := new(O)
-	output.SetBase(inputs.GetBase())
-	log.Printf("DEBUG 1.toOutput=%v", output)
+	var output O
 	if b.ExtraToOutput != nil {
-		b.ExtraToOutput(inputs, output)
+		b.ExtraToOutput(inputs, &output)
 	}
-	log.Printf("DEBUG 2.toOutput=%v", output)
-	return *output
+	return output
 }
 
 func (b BaseResource[I, O]) diffOutput(oldValue O, newValue O) map[string]provider.PropertyDiff {
 	oldBase := oldValue.GetBase()
 	newBase := newValue.GetBase()
-	log.Printf("DEBUG oldBase: %v", oldBase)
-	log.Printf("DEBUG newBase: %v", newBase)
 	diffs := map[string]provider.PropertyDiff{
 		"name":        DiffString(oldBase.Name, newBase.Name),
 		"description": DiffString(oldBase.Description, newBase.Description),
@@ -82,7 +76,6 @@ func (b BaseResource[I, O]) diffOutput(oldValue O, newValue O) map[string]provid
 	if b.ExtraDiff != nil {
 		b.ExtraDiff(oldValue, newValue, diffs)
 	}
-	log.Printf("DEBUG Diffs: %v", diffs)
 	return diffs
 }
 

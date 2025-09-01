@@ -50,7 +50,8 @@ func NewRoute() Route {
 				return inputs
 			},
 			ExtraToOutput: func(inputs RouteInputs, output *RouteOutput) {
-				output.Location = inputs.Location.ToOutput()
+				output.BaseOutputStruct = inputs.BaseInputStruct.ToOutput()
+				output.LocationOutputStruct = inputs.LocationInputsStruct.ToOutput()
 				output.Enabled = *inputs.Enabled
 				output.DebugFlow = *inputs.DebugFlow
 				output.ExportReporting = *inputs.ExportReporting
@@ -64,12 +65,10 @@ func NewRoute() Route {
 			},
 			ExtraDiff: func(oldValue RouteOutput, newValue RouteOutput, diffs map[string]provider.PropertyDiff) {
 				diffs["location"] = common.DiffLocation(oldValue.Location, newValue.Location)
-
 				diffs["enabled"] = common.DiffBool(oldValue.Enabled, newValue.Enabled)
 				diffs["debug_flow"] = common.DiffBool(oldValue.DebugFlow, newValue.DebugFlow)
 				diffs["export_reporting"] = common.DiffBool(oldValue.ExportReporting, newValue.ExportReporting)
 				diffs["capture"] = common.DiffBool(oldValue.Capture, newValue.Capture)
-
 				diffs["groups"] = common.DiffSlice(oldValue.Groups, newValue.Groups)
 				diffs["bound_listeners"] = common.DiffSlice(oldValue.BoundListeners, newValue.BoundListeners)
 				// TODO Frontend

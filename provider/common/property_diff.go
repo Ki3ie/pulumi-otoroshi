@@ -1,7 +1,6 @@
 package common
 
 import (
-	"log"
 	"maps"
 	"slices"
 
@@ -31,7 +30,6 @@ func DiffNilString(oldValue *string, newValue *string) provider.PropertyDiff {
 }
 
 func DiffString(oldValue string, newValue string) provider.PropertyDiff {
-	log.Printf("DEBUG DiffString: oldValue=%q, newValue=%q", oldValue, newValue)
 	if oldValue == newValue {
 		return provider.PropertyDiff{
 			Kind:      provider.Stable,

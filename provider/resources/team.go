@@ -40,6 +40,7 @@ func NewTeam() Team {
 				return inputs
 			},
 			ExtraToOutput: func(inputs TeamInputs, output *TeamOutput) {
+				output.BaseOutputStruct = inputs.BaseInputStruct.ToOutput()
 				output.Tenant = inputs.Tenant
 			},
 			ExtraDiff: func(oldValue TeamOutput, newValue TeamOutput, diffs map[string]provider.PropertyDiff) {
